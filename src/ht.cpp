@@ -40,22 +40,18 @@ int main()
     font.loadFromFile("./fonts/arial.ttf");
 
     sf::Text textPause("Press 'p' to pause.", font);
-    textPause.setCharacterSize(15);
+    textPause.setCharacterSize(20);
     textPause.setPosition(10, CELL_SIZE * GRID_HEIGHT + 5);
     textPause.setFillColor(BLACK);
 
-    sf::Text textPlay("Press 'p' to play.", font);
-    textPlay.setCharacterSize(15);
+    sf::Text textPlay("Game is paused. Press 'p' to play.", font);
+    textPlay.setCharacterSize(20);
     textPlay.setPosition(10, CELL_SIZE * GRID_HEIGHT + 5);
     textPlay.setFillColor(BLACK);
-    sf::Text textToggle("Click on cell to toggle live/dead cell.", font);
-    textToggle.setCharacterSize(15);
-    textToggle.setPosition(10, CELL_SIZE * GRID_HEIGHT + 25);
-    textToggle.setFillColor(BLACK);
 
     sf::Text textSpeed("Use left/right arrow keys to change speed.", font);
-    textSpeed.setCharacterSize(15);
-    textSpeed.setPosition(300, CELL_SIZE * GRID_HEIGHT + 5);
+    textSpeed.setCharacterSize(20);
+    textSpeed.setPosition(500, CELL_SIZE * GRID_HEIGHT + 5);
     textSpeed.setFillColor(BLACK);
 
     sf::RenderWindow window(sf::VideoMode(CELL_SIZE * GRID_WIDTH, CELL_SIZE * GRID_HEIGHT + 50), "Game of Life");
@@ -160,10 +156,9 @@ int main()
     window.draw(textSpeed);
     if (isPlaying)
         window.draw(textPause);
-    else if (isInputMode)
+    else if (!isPlaying)
     {
         window.draw(textPlay);
-        window.draw(textToggle);
     }
 
     window.display();
