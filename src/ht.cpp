@@ -26,7 +26,7 @@ int main()
     int grid[N_CELLS] = {};
     int gridNext[N_CELLS];
     srand(time(NULL));
-     for (int i = 0; i < N_CELLS; i++)
+    for (int i = 0; i < N_CELLS; i++)
         grid[i] = (double(rand()) / RAND_MAX < 0.1) ? 1 : 0;
 
     bool isInputMode = true; // Флаг для режима ввода первого поколения
@@ -34,7 +34,6 @@ int main()
     int delay = 120;
 
     bool isPlaying = true;
-
 
     sf::Font font;
     font.loadFromFile("./fonts/arial.ttf");
@@ -94,8 +93,16 @@ int main()
                         std::cout << "Cell (" << x << ", " << y << ") toggled." << std::endl;
                     }
                 }
+                else if (!isPlaying && event.mouseButton.button == sf::Mouse::Left)
+                {
+                    int x = double(event.mouseButton.x) / CELL_SIZE;
+                    int y = double(event.mouseButton.y) / CELL_SIZE;
+                    if (x >= 0 && x < GRID_WIDTH && y >= 0 && y < GRID_HEIGHT)
+                        grid[x + y * GRID_WIDTH] = !grid[x + y * GRID_WIDTH];
+                }
                 break;
-                default:break;
+            default:
+                break;
             }
         }
 
@@ -142,27 +149,27 @@ int main()
                 }
             }
         }
-    // move gridNext to grid
-    if (!isInputMode) // Пропустить переход к следующему поколению в режиме ввода
-    {
-        if (isPlaying)
+        // move gridNext to grid
+        if (!isInputMode) // Пропустить переход к следующему поколению в режиме ввода
         {
-            for (int i = 0; i < N_CELLS; i++)
-                grid[i] = gridNext[i];
+            if (isPlaying)
+            {
+                for (int i = 0; i < N_CELLS; i++)
+                    grid[i] = gridNext[i];
+            }
         }
-    }
 
-    // Additional info
-    window.draw(textSpeed);
-    if (isPlaying)
-        window.draw(textPause);
-    else if (!isPlaying)
-    {
-        window.draw(textPlay);
-    }
+        // Additional info
+        window.draw(textSpeed);
+        if (isPlaying)
+            window.draw(textPause);
+        else if (!isPlaying)
+        {
+            window.draw(textPlay);
+        }
 
-    window.display();
-    sf::sleep(sf::milliseconds(delay));
-}
-return 0;
+        window.display();
+        sf::sleep(sf::milliseconds(delay));
+    }
+    return 0;
 }
