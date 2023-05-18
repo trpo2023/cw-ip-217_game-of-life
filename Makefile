@@ -16,6 +16,7 @@ all: $(EXECUTABLE)
 
 $(EXECUTABLE): $(OBJS)
 	$(CC) $(CFLAGS) $^ -o $@ -L$(DLL_DIR) $(SFML_LIBS)
+	./bin/z
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
 	$(CC) $(CFLAGS) $(SFML_INCLUDE) -c $< -o $@
