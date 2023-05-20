@@ -157,7 +157,7 @@ void initialize()
     for (int i = 0; i < N_CELLS; i++)
         grid[i] = (double(rand()) / RAND_MAX < 0.1) ? 1 : 0;
 
-    font.loadFromFile("./fonts/arial.ttf");
+    font.loadFromFile("../fonts/arial.ttf");
 
     textPause.setString("Press 'p' to pause.");
     textPause.setFont(font);

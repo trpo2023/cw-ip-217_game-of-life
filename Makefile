@@ -1,27 +1,23 @@
-CC = g++
-CFLAGS = -Wall -Wextra
-SFML_INCLUDE = -I./src/SFML-2.5.1/include
-SFML_LIBS = -L./src/SFML-2.5.1/lib -lsfml-graphics -lsfml-window -lsfml-system
+CXX = g++
+CXXFLAGS = -Wall -Wextra
+LDFLAGS = -Llib/SFML-2.5.1/lib
+SFML_LIBS = -lsfml-graphics -lsfml-window -lsfml-system
+INCLUDES = -Ilib/SFML-2.5.1/include
 
 SRC_DIR = src
 OBJ_DIR = obj
 BIN_DIR = bin
-DLL_DIR = dll
 
 SRCS = $(wildcard $(SRC_DIR)/*.cpp)
 OBJS = $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRCS))
-EXECUTABLE = $(BIN_DIR)/z
 
-all: $(EXECUTABLE)
+TARGET = $(BIN_DIR)/z
 
-$(EXECUTABLE): $(OBJS)
-	$(CC) $(CFLAGS) $^ -o $@ -L$(DLL_DIR) $(SFML_LIBS)
-	./bin/z
+$(TARGET): $(OBJS)
+	$(CXX) $(LDFLAGS) $^ -o $@ $(SFML_LIBS)
 
 $(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
-	$(CC) $(CFLAGS) $(SFML_INCLUDE) -c $< -o $@
+	$(CXX) $(CXXFLAGS) $(INCLUDES) -c $< -o $@
 
 clean:
-	rm -f $(OBJS) $(EXECUTABLE)
-
-.PHONY: all clean
+	rm -rf $(OBJ_DIR)/*.o $(TARGET)
