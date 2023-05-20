@@ -12,9 +12,10 @@ const int N_CELLS = GRID_WIDTH * GRID_HEIGHT;
 int grid[N_CELLS] = {};
 int gridNext[N_CELLS];
 bool isInputMode = true;
-const int DELAY_INC = 50;
-int delay = 120;
 bool isPlaying = true;
+int delay = 120;
+const int DELAY_INC = 50;
+
 
 #define WHITE sf::Color::White
 #define BLACK sf::Color::Black

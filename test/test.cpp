@@ -3,6 +3,10 @@
 // Включаем заголовочные файлы с определениями функций
 #include "../src/helper.hpp"
 #include "test.hpp"
+
+bool isPlaying1 = true;
+int delay1 = 120;
+const int DELAY_INC1 = 50;
 // Тест для функции wrapValue
 TEST(HelperFunctionsTest, WrapValue) {
   // Проверяем, что функция wrapValue возвращает ожидаемые значения
@@ -11,7 +15,35 @@ TEST(HelperFunctionsTest, WrapValue) {
   EXPECT_EQ(wrapValue(10, 10), 0);
 }
 
-// Напишите дополнительные тесты для остальных функций вашего приложения
+// Тест для функции handleKeyboardInput - проверка правильного нажатия кнопки паузы "p"
+TEST(HelperFunctionsTest, HandleKeyboardInput_PauseButtonPressed) {
+  sf::Event event;
+  event.key.code = sf::Keyboard::P;
+  handleKeyboardInput(event);
+
+  // Проверяем, что isPlaying стало false
+  EXPECT_FALSE(isPlaying1);
+}
+
+// Тест для функции handleKeyboardInput - проверка правильного нажатия кнопки ускорения времени
+TEST(HelperFunctionsTest, HandleKeyboardInput_SpeedUpButtonPressed) {
+  sf::Event event;
+  event.key.code = sf::Keyboard::Right;
+  handleKeyboardInput(event);
+
+  // Проверяем, что delay уменьшилось на DELAY_INC
+  EXPECT_EQ(delay1, 120 - DELAY_INC1);
+}
+
+// Тест для функции handleKeyboardInput - проверка правильного нажатия кнопки замедления времени
+TEST(HelperFunctionsTest, HandleKeyboardInput_SlowDownButtonPressed) {
+  sf::Event event;
+  event.key.code = sf::Keyboard::Left;
+  handleKeyboardInput(event);
+
+  // Проверяем, что delay увеличилось на DELAY_INC
+  EXPECT_EQ(delay1, 120 + DELAY_INC1);
+}
 
 int mainTest(int argc, char** argv) {
   testing::InitGoogleTest(&argc, argv);

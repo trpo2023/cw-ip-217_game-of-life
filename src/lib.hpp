@@ -1,7 +1,5 @@
-#include <SFML/Graphics.hpp>
-#include "helper.hpp"
 
-void handleKeyboardInput(sf::Event event);
+#include "helper.hpp"
 
 void handleMouseInput(sf::Event event);
 
