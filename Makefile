@@ -1,40 +1,43 @@
-CXX = g++
-CXXFLAGS = -Wall -Wextra -Ilib/googletest/include
-SFML_DIR = lib/SFML-2.5.1
-GTEST_DIR = lib/googletest
+CC := g++
+CFLAGS := -std=c++17 -Wall -Wextra
+LDFLAGS := -lsfml-graphics -lsfml-window -lsfml-system -lgtest -lpthread
 
-SRC_DIR = src
-OBJ_DIR = obj
-BIN_DIR = bin
-TEST_DIR = test
-DLL_DIR = dll
+SRC_DIR := src
+OBJ_DIR := obj
+BIN_DIR := bin
 
-SRCS = $(wildcard $(SRC_DIR)/*.cpp)
-OBJS = $(patsubst $(SRC_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(SRCS))
+SRC_FILES := $(wildcard $(SRC_DIR)/*.cpp)
+OBJ_FILES := $(patsubst $(SRC_DIR)/%.cpp,$(OBJ_DIR)/%.o,$(SRC_FILES))
 
-TEST_SRCS = $(wildcard $(TEST_DIR)/*.cpp)
-TEST_OBJS = $(patsubst $(TEST_DIR)/%.cpp, $(OBJ_DIR)/%.o, $(TEST_SRCS))
+TEST_SRC_DIR := test
+TEST_OBJ_DIR := obj/test
+TEST_BIN_DIR := bin/test
 
-TARGET = $(BIN_DIR)/z
-TEST_TARGET = $(BIN_DIR)/test
+TEST_SRC_FILES := $(wildcard $(TEST_SRC_DIR)/*.cpp)
+TEST_OBJ_FILES := $(patsubst $(TEST_SRC_DIR)/%.cpp,$(TEST_OBJ_DIR)/%.o,$(TEST_SRC_FILES))
 
-$(TARGET): $(OBJS) | $(BIN_DIR)
-	$(CXX) $(CXXFLAGS) -o $@ $^ -L$(DLL_DIR) -L$(SFML_DIR)/lib -lsfml-graphics -lsfml-window -lsfml-system
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp
+	@mkdir -p $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
 
-$(TEST_TARGET): $(TEST_OBJS) $(OBJS) | $(BIN_DIR)
-	$(CXX) $(CXXFLAGS) -o $@ $^ -L$(DLL_DIR) -L$(SFML_DIR)/lib -lsfml-graphics -lsfml-window -lsfml-system -L$(GTEST_DIR)/lib -lgtest -lpthread
+$(OBJ_DIR)/test/%.o: $(TEST_SRC_DIR)/%.cpp
+	@mkdir -p $(TEST_OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
 
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.cpp | $(OBJ_DIR)
-	$(CXX) $(CXXFLAGS) -c $< -o $@ -I$(SFML_DIR)/include
+$(BIN_DIR)/game: $(OBJ_FILES)
+	@mkdir -p $(BIN_DIR)
+	$(CC) $^ -o $@ $(LDFLAGS)
 
-$(OBJ_DIR)/%.o: $(TEST_DIR)/%.cpp | $(OBJ_DIR)
-	$(CXX) $(CXXFLAGS) -c $< -o $@ -I$(SFML_DIR)/include -I$(GTEST_DIR)/include
+$(TEST_BIN_DIR)/test: $(OBJ_FILES) $(TEST_OBJ_FILES)
+	@mkdir -p $(TEST_BIN_DIR)
+	$(CC) $^ -o $@ $(LDFLAGS)
 
-$(OBJ_DIR):
-	mkdir -p $(OBJ_DIR)
+.PHONY: all clean test
 
-$(BIN_DIR):
-	mkdir -p $(BIN_DIR)
+all: $(BIN_DIR)/game
+
+test: $(TEST_BIN_DIR)/test
+	@./$(TEST_BIN_DIR)/test
 
 clean:
-	rm -rf $(OBJ_DIR) $(BIN_DIR)
+	rm -rf $(OBJ_DIR) $(BIN_DIR) $(TEST_OBJ_DIR) $(TEST_BIN_DIR)

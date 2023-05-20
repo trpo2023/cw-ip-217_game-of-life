@@ -3,6 +3,7 @@
 #include <time.h>
 #include "../src/lib.hpp"
 
+
 const int CELL_SIZE = 30;
 const sf::Vector2f CELL_VECTOR(CELL_SIZE, CELL_SIZE);
 const int GRID_WIDTH = 30;

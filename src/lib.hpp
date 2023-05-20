@@ -1,6 +1,5 @@
 #include <SFML/Graphics.hpp>
-
-int wrapValue(int v, int vMax);
+#include "helper.hpp"
 
 void handleKeyboardInput(sf::Event event);
 
