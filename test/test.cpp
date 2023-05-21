@@ -19,12 +19,17 @@ TEST(HelperFunctionsTest, WrapValue) {
 
 // Тест для функции handleKeyboardInput - проверка правильного нажатия кнопки паузы "p"
 TEST(HelperFunctionsTest, HandleKeyboardInput_PauseButtonPressed) {
-  sf::Event event;
-  event.key.code = sf::Keyboard::P;
-  handleKeyboardInput(event);
+sf::Event event;
+event.key.code = sf::Keyboard::P;
 
-  // Проверяем, что isPlaying стало false
-  EXPECT_FALSE(isPlaying);
+// Устанавливаем isPlaying в true перед тестом
+isPlaying = true;
+
+// Симулируем нажатие кнопки паузы
+handleKeyboardInput(event);
+
+// Проверяем, что isPlaying стало false после нажатия кнопки паузы
+EXPECT_FALSE(isPlaying);
 }
 
 int mainTest(int argc, char** argv) {
@@ -37,9 +42,6 @@ int mainTest(int argc, char** argv) {
       return RUN_ALL_TESTS();
     }
   }
-
-  // Открытие графического окна
-  // ...
 
   return 0;
 }
