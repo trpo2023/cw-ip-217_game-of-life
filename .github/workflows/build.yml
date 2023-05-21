@@ -1,3 +1,4 @@
+
 name: Build
 
 on: push
@@ -7,16 +8,10 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    
-      - name: Setup libs
-        run: |
-          sudo apt-get install -y libsfml-dev
-          sudo apt-get install -y libgtest-dev
+      - uses: actions/checkout@v2
 
       - name: Check codestyle
-        run: |
-          git ls-files *.{c,h} | xargs clang-format -i --verbose
-          git diff --exit-code
+        run: git ls-files *.{c,h} | xargs clang-format -i --verbose && git diff --exit-code
 
       - name: Build application
         run: make
