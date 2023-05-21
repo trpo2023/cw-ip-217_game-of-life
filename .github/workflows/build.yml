@@ -1,42 +1,24 @@
-name: Сборка проекта
+name: Build
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+on: push
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    
+
     steps:
-      - name: Checkout репозитория
+      - name: Checkout repo
         uses: actions/checkout@v2
-        
-      - name: Установка зависимостей
+
+      - name: Setup libs
         run: |
-          sudo apt-get update
           sudo apt-get install -y libsfml-dev
           sudo apt-get install -y libgtest-dev
-          sudo apt-get install -y cmake
-          cd /usr/src/gtest
-          sudo cmake CMakeLists.txt
-          sudo make
-          sudo cp *.a /usr/lib
-          cd -
-      
-      - name: Сборка проекта
+
+      - name: Check codestyle
         run: |
-          mkdir build
-          cd build
-          cmake ..
-          make
-          cd ..
-      
-      - name: Запуск тестов
-        run: |
-          cd build
-          ctest -V
+          git ls-files *.{c,h} | xargs clang-format -i --verbose
+          git diff --exit-code
+
+      - name: Build application
+        run: make
