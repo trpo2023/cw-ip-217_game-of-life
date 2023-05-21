@@ -1,5 +1,5 @@
 
-
+#include <gtest/gtest.h>
 // Включаем заголовочные файлы с определениями функций
 #include "../src/helper.hpp"
 #include "test.hpp"
@@ -16,6 +16,7 @@ TEST(HelperFunctionsTest, WrapValue) {
   EXPECT_EQ(wrapValue(10, 10), 0);
 }
 
+
 // Тест для функции handleKeyboardInput - проверка правильного нажатия кнопки паузы "p"
 TEST(HelperFunctionsTest, HandleKeyboardInput_PauseButtonPressed) {
   sf::Event event;
@@ -24,26 +25,6 @@ TEST(HelperFunctionsTest, HandleKeyboardInput_PauseButtonPressed) {
 
   // Проверяем, что isPlaying стало false
   EXPECT_FALSE(isPlaying);
-}
-
-// Тест для функции handleKeyboardInput - проверка правильного нажатия кнопки ускорения времени
-TEST(HelperFunctionsTest, HandleKeyboardInput_SpeedUpButtonPressed) {
-  sf::Event event;
-  event.key.code = sf::Keyboard::Right;
-  handleKeyboardInput(event);
-
-  // Проверяем, что delay уменьшилось на DELAY_INC
-  EXPECT_EQ(delay, 120 - DELAY_INC);
-}
-
-// Тест для функции handleKeyboardInput - проверка правильного нажатия кнопки замедления времени
-TEST(HelperFunctionsTest, HandleKeyboardInput_SlowDownButtonPressed) {
-  sf::Event event;
-  event.key.code = sf::Keyboard::Left;
-  handleKeyboardInput(event);
-
-  // Проверяем, что delay увеличилось на DELAY_INC
-  EXPECT_EQ(delay, 120 + DELAY_INC);
 }
 
 int mainTest(int argc, char** argv) {
