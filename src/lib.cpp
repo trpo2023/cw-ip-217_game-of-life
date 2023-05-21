@@ -2,7 +2,7 @@
 #include <iostream>
 #include <time.h>
 #include "../src/lib.hpp"
-
+#include "helper.hpp"
 
 const int CELL_SIZE = 30;
 const sf::Vector2f CELL_VECTOR(CELL_SIZE, CELL_SIZE);
@@ -12,10 +12,10 @@ const int N_CELLS = GRID_WIDTH * GRID_HEIGHT;
 int grid[N_CELLS] = {};
 int gridNext[N_CELLS];
 bool isInputMode = true;
+
 bool isPlaying = true;
 int delay = 120;
 const int DELAY_INC = 50;
-
 
 #define WHITE sf::Color::White
 #define BLACK sf::Color::Black

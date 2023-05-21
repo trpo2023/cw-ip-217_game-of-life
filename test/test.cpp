@@ -4,9 +4,10 @@
 #include "../src/helper.hpp"
 #include "test.hpp"
 
-bool isPlaying1 = true;
-int delay1 = 120;
-const int DELAY_INC1 = 50;
+extern bool isPlaying;
+extern int delay;
+extern bool isInputMode;
+extern const int DELAY_INC = 50;
 // Тест для функции wrapValue
 TEST(HelperFunctionsTest, WrapValue) {
   // Проверяем, что функция wrapValue возвращает ожидаемые значения
@@ -22,7 +23,7 @@ TEST(HelperFunctionsTest, HandleKeyboardInput_PauseButtonPressed) {
   handleKeyboardInput(event);
 
   // Проверяем, что isPlaying стало false
-  EXPECT_FALSE(isPlaying1);
+  EXPECT_FALSE(isPlaying);
 }
 
 // Тест для функции handleKeyboardInput - проверка правильного нажатия кнопки ускорения времени
@@ -32,7 +33,7 @@ TEST(HelperFunctionsTest, HandleKeyboardInput_SpeedUpButtonPressed) {
   handleKeyboardInput(event);
 
   // Проверяем, что delay уменьшилось на DELAY_INC
-  EXPECT_EQ(delay1, 120 - DELAY_INC1);
+  EXPECT_EQ(delay, 120 - DELAY_INC);
 }
 
 // Тест для функции handleKeyboardInput - проверка правильного нажатия кнопки замедления времени
@@ -42,7 +43,7 @@ TEST(HelperFunctionsTest, HandleKeyboardInput_SlowDownButtonPressed) {
   handleKeyboardInput(event);
 
   // Проверяем, что delay увеличилось на DELAY_INC
-  EXPECT_EQ(delay1, 120 + DELAY_INC1);
+  EXPECT_EQ(delay, 120 + DELAY_INC);
 }
 
 int mainTest(int argc, char** argv) {

@@ -1,5 +1,7 @@
+#pragma once
 
-#include "helper.hpp"
+
+#include <SFML/Graphics.hpp>
 
 void handleMouseInput(sf::Event event);
 
