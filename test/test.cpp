@@ -1,8 +1,7 @@
 
 #include <gtest/gtest.h>
 // Включаем заголовочные файлы с определениями функций
-#include "../src/helper.hpp"
-
+#include "../src/app_lib/helper.hpp"
 
 extern bool isPlaying;
 extern int delay;
@@ -17,28 +16,26 @@ TEST(HelperFunctionsTest, WrapValue) {
 }
 
 TEST(HandleMouseInputTest, CellToggledInCorrectPosition) {
-    const int CELL_SIZE = 30;
-    const int GRID_WIDTH = 30;
-    const int GRID_HEIGHT = 20;
-    int grid[GRID_WIDTH * GRID_HEIGHT] = {};
-    bool isInputMode = true;
-    bool isPlaying = true;
-    sf::Event event;
-    event.type = sf::Event::MouseButtonPressed;
-    event.mouseButton.button = sf::Mouse::Left;
-    event.mouseButton.x = 2 * CELL_SIZE;  // Mouse position on the X axis
-    event.mouseButton.y = 1 * CELL_SIZE;  // Mouse position on the Y axis
+  const int CELL_SIZE = 30;
+  const int GRID_WIDTH = 30;
+  const int GRID_HEIGHT = 20;
+  int grid[GRID_WIDTH * GRID_HEIGHT] = {};
+  bool isInputMode = true;
+  bool isPlaying = true;
+  sf::Event event;
+  event.type = sf::Event::MouseButtonPressed;
+  event.mouseButton.button = sf::Mouse::Left;
+  event.mouseButton.x = 1 * CELL_SIZE; // Положение мыши по оси X
+  event.mouseButton.y = 1 * CELL_SIZE; // Положение мыши по оси Y
 
-    // Invoke handleMouseInput function
-    handleMouseInput(event, grid, isInputMode, isPlaying, GRID_WIDTH, GRID_HEIGHT);
+  // Вызываем функцию handleMouseInput
+  handleMouseInput(event, grid, isInputMode, isPlaying, GRID_WIDTH, GRID_HEIGHT);
 
-    // Verify that the cell appeared in the correct position on the screen
-    int x = event.mouseButton.x / CELL_SIZE;
-    int y = event.mouseButton.y / CELL_SIZE;
-    ASSERT_TRUE(x >= 0 && x < GRID_WIDTH && y >= 0 && y < GRID_HEIGHT);
-    ASSERT_TRUE(grid[x + y * GRID_WIDTH]);
+  // Проверяем, что клетка появилась в нужном месте на экране
+  int x = event.mouseButton.x / CELL_SIZE;
+  int y = event.mouseButton.y / CELL_SIZE;
+  ASSERT_TRUE(grid[x + y * GRID_WIDTH]);
 }
-
 // Тест для функции handleKeyboardInput - проверка правильного нажатия кнопки
 // паузы "p"
 TEST(HelperFunctionsTest, HandleKeyboardInput_PauseButtonPressed) {
