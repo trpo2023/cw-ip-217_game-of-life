@@ -56,8 +56,10 @@ void handleKeyboardInput(sf::Event event)
         delay += DELAY_INC;
 }
 
-void handleMouseInput(sf::Event event)
+void handleMouseInput(sf::Event event, int* grid, bool& isInputMode, bool& isPlaying, int GRID_WIDTH, int GRID_HEIGHT)
 {
+    const int CELL_SIZE = 30;
+
     if (isInputMode && event.mouseButton.button == sf::Mouse::Left)
     {
         int x = event.mouseButton.x / CELL_SIZE;
@@ -196,7 +198,9 @@ void processEvents()
             handleKeyboardInput(event);
             break;
         case sf::Event::MouseButtonPressed:
-            handleMouseInput(event);
+            void handleMouseInput(sf::Event event, int* grid, bool& isInputMode, bool& isPlaying, int GRID_WIDTH, int GRID_HEIGHT);
+            drawGrid();
+            window.display();
             break;
         default:
             break;

@@ -2,7 +2,7 @@
 #include <iostream>
 #include <time.h>
 #include "../src/lib.hpp"
-#include "../test/test.hpp"
+#include "test.hpp"
 
 const int CELL_SIZE = 30;
 const int GRID_WIDTH = 30;

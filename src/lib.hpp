@@ -1,9 +1,6 @@
 #pragma once
 
-
 #include <SFML/Graphics.hpp>
-
-void handleMouseInput(sf::Event event);
 
 void drawGrid();
 
