@@ -58,8 +58,6 @@ void handleKeyboardInput(sf::Event event)
 
 void handleMouseInput(sf::Event event, int* grid, bool& isInputMode, bool& isPlaying, int GRID_WIDTH, int GRID_HEIGHT)
 {
-    const int CELL_SIZE = 30;
-
     if (isInputMode && event.mouseButton.button == sf::Mouse::Left)
     {
         int x = event.mouseButton.x / CELL_SIZE;
@@ -79,7 +77,7 @@ void handleMouseInput(sf::Event event, int* grid, bool& isInputMode, bool& isPla
     }
 }
 
-void drawGrid()
+void drawGrid(int* grid, int GRID_WIDTH, int GRID_HEIGHT)
 {
     window.clear(WHITE);
     for (int x = 0; x < GRID_WIDTH; x++)
@@ -198,9 +196,9 @@ void processEvents()
             handleKeyboardInput(event);
             break;
         case sf::Event::MouseButtonPressed:
-            void handleMouseInput(sf::Event event, int* grid, bool& isInputMode, bool& isPlaying, int GRID_WIDTH, int GRID_HEIGHT);
-            drawGrid();
-            window.display();
+            handleMouseInput(event, grid, isInputMode, isPlaying, GRID_WIDTH, GRID_HEIGHT);
+            drawGrid(grid, GRID_WIDTH, GRID_HEIGHT);  // Обновление отображения после изменения состояния клеток
+            window.display();  // Обновление экрана
             break;
         default:
             break;
@@ -210,7 +208,7 @@ void processEvents()
 
 void render()
 {
-    drawGrid();
+    drawGrid(grid, GRID_WIDTH, GRID_HEIGHT);
     updateGridNext();
     moveGridNextToGrid();
     drawAdditionalInfo();

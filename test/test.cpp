@@ -26,15 +26,16 @@ TEST(HandleMouseInputTest, CellToggledInCorrectPosition) {
     sf::Event event;
     event.type = sf::Event::MouseButtonPressed;
     event.mouseButton.button = sf::Mouse::Left;
-    event.mouseButton.x = 2 * CELL_SIZE;  // Положение мыши по оси X
-    event.mouseButton.y = 1 * CELL_SIZE;  // Положение мыши по оси Y
+    event.mouseButton.x = 2 * CELL_SIZE;  // Mouse position on the X axis
+    event.mouseButton.y = 1 * CELL_SIZE;  // Mouse position on the Y axis
 
-    // Вызываем функцию handleMouseInput
+    // Invoke handleMouseInput function
     handleMouseInput(event, grid, isInputMode, isPlaying, GRID_WIDTH, GRID_HEIGHT);
 
-    // Проверяем, что клетка появилась в нужном месте на экране
+    // Verify that the cell appeared in the correct position on the screen
     int x = event.mouseButton.x / CELL_SIZE;
     int y = event.mouseButton.y / CELL_SIZE;
+    ASSERT_TRUE(x >= 0 && x < GRID_WIDTH && y >= 0 && y < GRID_HEIGHT);
     ASSERT_TRUE(grid[x + y * GRID_WIDTH]);
 }
 

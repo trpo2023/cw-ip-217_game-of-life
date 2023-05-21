@@ -2,7 +2,7 @@
 
 #include <SFML/Graphics.hpp>
 
-void drawGrid();
+void drawGrid(int* grid, int GRID_WIDTH, int GRID_HEIGHT);
 
 void updateGridNext();
 
