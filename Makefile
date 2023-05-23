@@ -46,7 +46,6 @@ $(GAME_OBJ_DIR)/lib.o: $(SRC_DIR)/lib.cpp
 	@mkdir -p $(GAME_OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
 
-.PHONY: all clean test app
 
 all: app
 
