@@ -10,8 +10,10 @@ cw-ip-217_game-of-life created by GitHub Classroom
 
 Для установки приложения использовать следующие команды:
 
-sudo apt-get install libsfml-dev
+# sudo apt-get install libsfml-dev
 
-sudo apt-get install libgtest-dev
+# sudo apt-get install libgtest-dev
 
-Для запуска программы требуется запустить лежащий в репозитории игры Makefile, командой “make”.
+Для запуска программы требуется запустить лежащий в репозитории игры Makefile командой “make”.
+
+Для запуска тестов требуется запустить лежащий в репозитории игры Makefile командой “make ctest”.
