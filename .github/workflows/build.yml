@@ -22,3 +22,7 @@ jobs:
 
       - name: Build application
         run: make
+        
+      - name: Build ctests
+        run: make ctest
+
