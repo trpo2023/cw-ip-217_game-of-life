@@ -1,6 +1,7 @@
-#include "../app_lib/lib.hpp"
-#include "../app_lib/helper.hpp"
+#include <lib.hpp>
+
 #include <SFML/Graphics.hpp>
+
 #include <iostream>
 #include <time.h>
 

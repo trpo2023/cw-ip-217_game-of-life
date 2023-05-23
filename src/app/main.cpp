@@ -1,6 +1,9 @@
-#include "../app_lib/lib.hpp"
-#include "../app_lib/test.hpp"
+#include <lib.hpp>
+#include <test.hpp>
+
 #include <SFML/Graphics.hpp>
+#include <gtest/gtest.h>
+
 #include <iostream>
 #include <time.h>
 

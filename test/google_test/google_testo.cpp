@@ -1,7 +1,8 @@
 
 #include <gtest/gtest.h>
-// Включаем заголовочные файлы с определениями функций
-#include "../src/app_lib/helper.hpp"
+#include <SFML/Graphics.hpp>
+#include <lib.hpp>
+#include <time.h>
 
 extern bool isPlaying;
 extern int delay;
@@ -20,21 +21,34 @@ TEST(HandleMouseInputTest, CellToggledInCorrectPosition) {
   const int GRID_WIDTH = 30;
   const int GRID_HEIGHT = 20;
   int grid[GRID_WIDTH * GRID_HEIGHT] = {};
+  int i = 0;
+
   bool isInputMode = true;
   bool isPlaying = true;
+
   sf::Event event;
   event.type = sf::Event::MouseButtonPressed;
   event.mouseButton.button = sf::Mouse::Left;
-  event.mouseButton.x = 1 * CELL_SIZE; // Положение мыши по оси X
-  event.mouseButton.y = 1 * CELL_SIZE; // Положение мыши по оси Y
 
-  // Вызываем функцию handleMouseInput
-  handleMouseInput(event, grid, isInputMode, isPlaying, GRID_WIDTH, GRID_HEIGHT);
 
-  // Проверяем, что клетка появилась в нужном месте на экране
-  int x = event.mouseButton.x / CELL_SIZE;
-  int y = event.mouseButton.y / CELL_SIZE;
-  ASSERT_TRUE(grid[x + y * GRID_WIDTH]);
+
+  while(i < 10)
+  {
+    event.mouseButton.x = i * CELL_SIZE; // Положение мыши по оси X
+    event.mouseButton.y = i * CELL_SIZE; // Положение мыши по оси Y
+
+    // Вызываем функцию handleMouseInput
+    handleMouseInput(event, grid, isInputMode, isPlaying, GRID_WIDTH, GRID_HEIGHT);
+
+    // Проверяем, что клетка появилась в нужном месте на экране
+    int x = event.mouseButton.x / CELL_SIZE;
+    int y = event.mouseButton.y / CELL_SIZE;
+
+    ASSERT_TRUE(grid[x + y * GRID_WIDTH]);
+    
+    i++;
+  }
+  
 }
 // Тест для функции handleKeyboardInput - проверка правильного нажатия кнопки
 // паузы "p"
