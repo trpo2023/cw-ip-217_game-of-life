@@ -1,3 +1,4 @@
+
 CC := g++
 CFLAGS := -std=c++17 -Wall -Wextra -Ilib/thirdparty -Ilib/SFML-2.5.1/include -Ilib/googletest/include -Isrc/app_lib
 LDFLAGS := -Llib/SFML-2.5.1/lib -lsfml-graphics -lsfml-window -lsfml-system -lgtest -lpthread
@@ -41,6 +42,7 @@ $(BIN_DIR)/game: $(GAME_OBJ_FILES) $(GTEST_OBJ_FILES)
 $(BIN_DIR)/ctest: $(CTEST_OBJ_FILES) $(GAME_OBJ_DIR)/lib.o
 	@mkdir -p $(BIN_DIR)
 	$(CC) $^ -o $@ $(LDFLAGS)
+	@$(BIN_DIR)/ctest
 
 $(GAME_OBJ_DIR)/lib.o: $(SRC_DIR)/lib.cpp
 	@mkdir -p $(GAME_OBJ_DIR)
