@@ -10,11 +10,6 @@ jobs:
       - name: Checkout repositories
         uses: actions/checkout@v2
 
-      - name: Setup libs
-        run: |
-          sudo apt-get install -y libsfml-dev
-          sudo apt-get install -y libgtest-dev
-
       - name: Check codestyle
         run: |
           git ls-files *.{c,h} | xargs clang-format -i --verbose
