@@ -25,4 +25,7 @@ jobs:
         
       - name: Build ctests
         run: make ctest
+        
+      - name: Run tests
+        run: bin/ctest
 
