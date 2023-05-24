@@ -4,11 +4,16 @@ on: push
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-20.04
 
     steps:
       - name: Checkout repositories
         uses: actions/checkout@v2
+
+      - name: Setup libs
+        run: |
+          sudo apt-get install -y libsfml-dev
+          sudo apt-get install -y libgtest-dev
 
       - name: Check codestyle
         run: |
